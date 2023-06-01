@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <!-- CSS librerias -->
+    <link rel="stylesheet" href="./src/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crud Typescript</title>
+  </head>
+  <body>
+    
+    <div class="container mt-5">
+      <div class="text-center">
+        <h1 class="display-5 mb-5">Estudiantes</h1>
+      </div>
+      <div class="main row justify-content-center">
+        <!-- formulario -->
+        <form id="studentForm" class="row justify-content-center mb-4" autocomplete="off">
+          <div class="row col-10 col-md-8 mb-3">
+            <div class="col-6">
+              <label for="firstName">Nombre</label>
+              <input class="form-control" id="firstName" type="text" placeholder=" Ingresa nombre">
+            </div>
+            <div class="col-6">
+              <label for="lastName">Apellido</label>
+              <input class="form-control" id="lastName" type="text" placeholder="Ingresa apellido">
+            </div>
+          </div>
+          <div class="row col-10 col-md-8 mb-3">
+            <div class="col-2">
+              <label for="typeGovId">tipo</label>
+              <select class="form-select" id="typeGovId">
+                <option value="1">CC</option>
+                <option value="2">TI</option>
+                <option value="2">PP</option>
+              </select>
+            </div>
+            <div class="col-5">
+              <label for="govId">Documento</label>
+              <input class="form-control" id="govId" type="number" placeholder="Digita documento">
+            </div>
+            <div class="col-5">
+              <label for="phone">Celular</label>
+              <input class="form-control" id="phone" type="number" placeholder="Celular">
+            </div>
+          </div>
+          <div class="row col-10 col-md-8 mb-3">
+            <div class="col-4">
+              <label for="email">Correo</label>
+              <input class="form-control" id="email" type="text" placeholder="Agrega correo">
+            </div>
+            <div class="col-4">
+              <label for="linkedin">Linkendin</label>
+              <input class="form-control" id="linkedin" type="text" placeholder="Agrega cuenta">
+            </div>
+            <div class="col-4">
+              <label for="github">Github</label>
+              <input class="form-control" id="github" type="text" placeholder="Agrega cuenta">
+            </div>
+          </div>
+          <div class="col-10 col-md-7">
+            <button class="btn btn-outline-success add-btn">Guardar</button>
+          </div>
+        </form>
+        <!-- tabla -->
+        <div class="col-12 col-md-10 mt-5">
+          <table class="table table-dark table-bordered">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Celular</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="studentList">
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Título del modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="studentForm" class="row justify-content-center mb-4" autocomplete="off">
+              <div class="row col-12 col-md-8 mb-3">
+                <div class="col-6">
+                  <label for="firstName">Nombre</label>
+                  <input class="form-control" id="updateFirstName" type="text" placeholder=" Ingresa nombre">
+                </div>
+                <div class="col-6">
+                  <label for="lastName">Apellido</label>
+                  <input class="form-control" id="updateLastName" type="text" placeholder="Ingresa apellido">
+                </div>
+              </div>
+              <div class="row col-12 col-md-8 mb-3">
+                <div class="col-6">
+                  <label for="email">Correo</label>
+                  <input class="form-control" id="updateEmail" type="text" placeholder="Agrega correo">
+                </div>
+                <div class="col-6">
+                  <label for="phone">Celular</label>
+                  <input class="form-control" id="updatePhone" type="number" placeholder="Celular">
+                </div>
+              </div>
+              <div class="row col-12 col-md-8 mb-3">
+                <div class="col-6">
+                  <label for="linkedin">Linkendin</label>
+                  <input class="form-control" id="updateLinkedin" type="text" placeholder="Agrega cuenta">
+                </div>
+                <div class="col-6">
+                  <label for="github">Github</label>
+                  <input class="form-control" id="updateGithub" type="text" placeholder="Agrega cuenta">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnDelete">Cerrar</button>
+            <button class="btn btn-primary" id="btnUpdate" onclick="()=>updateStudent()">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS librerias -->
+    <script type="module" src="./src/main.ts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>
